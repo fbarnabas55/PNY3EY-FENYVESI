@@ -1,0 +1,16 @@
+<div class="container py-4">
+  <div class="row g-4">
+    <div class="col-md-4" *ngFor="let order of orders">
+      <div class="glass-card">
+        <h5>{{ order.orderName }}</h5>
+        <p><strong>Telepítési cím:</strong> {{ order.installationAdress }}</p>
+        <p><strong>Telefon:</strong> {{ order.phoneNumber }}</p>
+        <p><strong>Email:</strong> {{ order.email }}</p>
+        <p><strong>Határidő:</strong> {{ order.deadline | date }}</p>
+        <p><strong>Kezdés:</strong> {{ order.startDate | date }}</p>
+
+        <a [routerLink]="[order.id]" class="btn btn-outline-primary mt-2">Részletek</a>
+      </div>
+    </div>
+  </div>
+</div>

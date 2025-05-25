@@ -1,0 +1,24 @@
+<div class="container py-4" *ngIf="order">
+  <div class="glass-card mb-4">
+    <h3>{{ order.orderName }}</h3>
+    <p><strong>Telepítési cím:</strong> {{ order.installationAdress }}</p>
+    <p><strong>Telefon:</strong> {{ order.phoneNumber }}</p>
+    <p><strong>Email:</strong> {{ order.email }}</p>
+    <p><strong>Határidő:</strong> {{ order.deadline | date }}</p>
+  </div>
+
+  <div *ngIf="order.projects?.length">
+    <h4 class="mb-3">Projektek</h4>
+    <div class="row g-3">
+      <div class="col-md-4" *ngFor="let project of order.projects">
+        <div class="glass-card">
+          <h6>{{ project.projectName }}</h6>
+          <p><strong>Projektvezető:</strong> {{ project.projectManager }}</p>
+          <p><strong>Ár:</strong> {{ project.price }} Ft</p>
+          <p><strong>Csomagigény:</strong> {{ project.packageDemand }}</p>
+          <p><strong>Indulás:</strong> {{ project.startDate | date }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
