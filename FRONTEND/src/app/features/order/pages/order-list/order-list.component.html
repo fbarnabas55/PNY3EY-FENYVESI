@@ -1,4 +1,5 @@
 <div class="container py-4">
+  <a routerLink="/orders/new" class="btn btn-success mb-3">+ Új rendelés</a>
   <div class="row g-4">
     <div class="col-md-4" *ngFor="let order of orders">
       <div class="glass-card">
@@ -10,6 +11,9 @@
         <p><strong>Kezdés:</strong> {{ order.startDate | date }}</p>
 
         <a [routerLink]="[order.id]" class="btn btn-outline-primary mt-2">Részletek</a>
+        <a [routerLink]="['/orders/edit', order.id]" class="btn btn-sm btn-outline-primary me-2">Szerkesztés</a>
+        <button class="btn btn-sm btn-outline-danger" (click)="deleteOrder(order.id)">Törlés</button>
+
       </div>
     </div>
   </div>

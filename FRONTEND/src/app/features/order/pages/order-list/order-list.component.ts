@@ -19,4 +19,13 @@ export class OrderListComponent implements OnInit {
       this.orders = data;
     });
   }
+
+  deleteOrder(id: string): void {
+    if (confirm('Biztosan törlöd ezt a rendelést?')) {
+      this.orderService.deleteOrder(id).subscribe(() => {
+        this.orders = this.orders.filter(o => o.id !== id);
+      });
+    } 
+  }
+
 }

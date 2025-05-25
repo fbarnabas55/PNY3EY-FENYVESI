@@ -4,16 +4,22 @@ import { CommonModule } from '@angular/common';
 import { OrderRoutingModule } from './order-routing.module';
 import { OrderListComponent } from './pages/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OrderEditorComponent } from './pages/order-editor/order-editor.component';
 
 
 @NgModule({
   declarations: [
     OrderListComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    OrderEditorComponent
+    
   ],
   imports: [
     CommonModule,
-    OrderRoutingModule
+    OrderRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class OrderModule { }
