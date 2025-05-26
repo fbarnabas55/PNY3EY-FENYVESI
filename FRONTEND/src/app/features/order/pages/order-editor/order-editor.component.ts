@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { OrderService } from '../../services/order.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OrderService } from '../../services/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-editor',
+  standalone: false,
   templateUrl: './order-editor.component.html',
-  styleUrls: ['./order-editor.component.sass']
+  styleUrl: './order-editor.component.sass'
 })
 export class OrderEditorComponent implements OnInit {
   form: FormGroup;
@@ -17,6 +18,7 @@ export class OrderEditorComponent implements OnInit {
     private router: Router
   ) {
     this.form = this.fb.group({
+      id:['',Validators.required],
       orderName: ['', Validators.required],
       installationAdress: [''],
       phoneNumber: [''],

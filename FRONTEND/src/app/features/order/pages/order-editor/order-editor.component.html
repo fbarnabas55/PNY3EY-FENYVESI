@@ -2,34 +2,35 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="glass-card p-4">
     <h3>Új rendelés</h3>
 
+
     <div class="mb-3">
-      <label>Rendelés neve</label>
-      <input type="text" formControlName="orderName" class="form-control" />
+      <label for="id">Rendelés ID</label>
+      <input id="id" formControlName="id" class="form-control" />
     </div>
 
     <div class="mb-3">
-      <label>Telepítési cím</label>
-      <input type="text" formControlName="installationAdress" class="form-control" />
+      <label for="orderName">Rendelés neve</label>
+      <input id="orderName" formControlName="orderName" class="form-control" />
     </div>
 
     <div class="mb-3">
-      <label>Telefonszám</label>
-      <input type="text" formControlName="phoneNumber" class="form-control" />
+      <label for="installationAdress">Telepítési cím</label>
+      <input id="installationAdress" formControlName="installationAdress" class="form-control" />
     </div>
 
     <div class="mb-3">
-      <label>Email</label>
-      <input type="email" formControlName="email" class="form-control" />
+      <label for="phoneNumber">Telefonszám</label>
+      <input id="phoneNumber" formControlName="phoneNumber" class="form-control" />
     </div>
 
     <div class="mb-3">
-      <label>Kezdés dátuma</label>
-      <input type="date" formControlName="startDate" class="form-control" />
+      <label for="email">Email</label>
+      <input id="email" type="email" formControlName="email" class="form-control" />
     </div>
 
     <div class="mb-3">
-      <label>Határidő</label>
-      <input type="date" formControlName="deadline" class="form-control" />
+      <label for="deadline">Határidő</label>
+      <input id="deadline" type="datetime-local" formControlName="deadline" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">Mentés</button>

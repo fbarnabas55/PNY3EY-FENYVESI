@@ -31,7 +31,7 @@ export enum PackageDemand {
 }
 
 export interface Project {
-  id: string;
+  id?: string;
   orderId: string;
   projectName: string;
   description: string;
