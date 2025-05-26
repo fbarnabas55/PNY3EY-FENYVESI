@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-list',
+  standalone: false,
   templateUrl: './nav-list.component.html',
-  styleUrls: ['./nav-list.component.sass']
+  styleUrl: './nav-list.component.sass'
 })
 export class NavListComponent {
   searchTerm: string = '';
@@ -19,14 +20,15 @@ export class NavListComponent {
   }
 
   toggleTheme(): void {
-    this.isDark = !this.isDark;
+  this.isDark = !this.isDark;
 
-    const body = document.body;
-    if (this.isDark) {
-      body.classList.remove('light-theme');
-    } else {
-      body.classList.add('light-theme');
-    }
+  const body = document.body;
+  if (this.isDark) {
+    body.classList.remove('light-theme');
+    body.classList.add('dark-theme');
+  } else {
+    body.classList.remove('dark-theme');
+    body.classList.add('light-theme');
   }
 }
-  
+}

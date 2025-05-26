@@ -1,1 +1,104 @@
-/* You can add global styles to this file, and also import other style files */
+body.dark-theme
+  background-color: #121212
+  color: #f1f1f1
+
+  a, p, h1, h2, h3, h4, h5, h6, span, label, div, input, button
+    color: #f1f1f1
+
+  .nav-container
+    background: rgba(30, 60, 90, 0.7) // sötétkék háttér
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+
+  .glass-card
+    background: rgba(255, 255, 255, 0.05)
+    backdrop-filter: blur(12px)
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    border-radius: 1rem
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4)
+    transition: all 0.3s ease
+
+    &:hover
+      transform: translateY(-2px)
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6)
+
+.glass-editor
+    background: rgba(20, 20, 20, 0.6)
+    backdrop-filter: blur(10px)
+    border: 1px solid rgba(255, 255, 255, 0.08)
+    border-radius: 1rem
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
+
+    input
+      background: rgba(30, 30, 30, 0.9)
+      border: 1px solid rgba(255, 255, 255, 0.1)
+      color: #f1f1f1
+      border-radius: 0.5rem
+      padding: 0.5rem 1rem
+      width: 100%
+      outline: none
+
+      &::placeholder
+        color: #aaaaaa
+
+      &:focus
+        border-color: #66b2ff
+        background: rgba(40, 40, 40, 1)
+
+    button
+      background-color: #0d6efd
+      color: white
+      border: none
+
+      &:hover
+        background-color: #0b5ed7
+
+    
+    
+
+
+
+body.light-theme
+  background-color: #ffffff
+  color: #1a1a1a
+
+  a, p, h1, h2, h3, h4, h5, h6, span, label, div, input, button
+    color: #1a1a1a
+
+  .nav-container
+    background: rgba(173, 216, 230, 0.9) // világoskék háttér
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+  .glass-card
+    background: rgba(255, 255, 255, 0.6)
+    backdrop-filter: blur(12px)
+    border: 1px solid rgba(0, 0, 0, 0.05)
+    border-radius: 1rem
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
+    transition: all 0.3s ease
+
+    &:hover
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15)
+
+  .btn
+    background-color: #007bff
+    color: #ffffff
+    border: 1px solid rgba(0, 0, 0, 0.1)
+
+    &:hover
+      background-color: #0056b3
+      color: #ffffff
+
+
+  .nav-link
+    color: #1a1a1a
+    transition: color 0.2s ease
+
+    i
+      color: #1a1a1a
+      transition: color 0.2s ease
+
+    &:hover
+      color: #007bff
+
+      i
+        color: #007bff

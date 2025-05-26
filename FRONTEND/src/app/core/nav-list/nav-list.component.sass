@@ -1,14 +1,16 @@
 .nav-container
-  background: rgba(255, 255, 255, 0.04)
-  backdrop-filter: blur(10px)
+  background: rgba(58, 58, 58, 0.74)
+  backdrop-filter: blur(12px)
   border-bottom: 1px solid rgba(255, 255, 255, 0.1)
-  color: #e0e0e0
+  color: #eaeaea
   position: sticky
   top: 0
   z-index: 1000
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.4)
+ 
 
 .nav-link
-  color: #cccccc
+  color: #dddddd
   text-decoration: none
   font-weight: 500
   font-size: 1rem
@@ -18,24 +20,39 @@
     color: #ffffff
 
 .search-bar
+  position: relative
+
   input
     background: rgba(255, 255, 255, 0.08)
     border: 1px solid rgba(255, 255, 255, 0.2)
     color: white
     padding-left: 2.5rem
     width: 250px
+    border-radius: 999px
+    transition: border 0.2s ease
+
+    &::placeholder
+      color:rgb(99, 86, 86)
+
+    &:focus
+      border-color: #66b2ff
+      background: rgba(255, 255, 255, 0.1)
 
   .search-icon
     left: 1rem
     top: 50%
     transform: translateY(-50%)
     color: #999
+    font-size: 1rem
 
 .toggle-theme-btn
   background: none
   border: none
   color: #ccc
-  font-size: 1.2rem
+  font-size: 1.4rem
+  transition: color 0.2s ease
 
   &:hover
-    color: #fff
+    color: #ffffff
+
+
