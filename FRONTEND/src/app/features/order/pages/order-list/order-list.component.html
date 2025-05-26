@@ -10,9 +10,9 @@
         <p><strong>Határidő:</strong> {{ order.deadline | date }}</p>
         <p><strong>Kezdés:</strong> {{ order.startDate | date }}</p>
 
-        <a [routerLink]="[order.id]" class="btn btn-outline-primary mt-2">Részletek</a>
+        <a [routerLink]="[order.id]" class="btn btn-sm btn-outline-primary me-2">Részletek</a>
         <a [routerLink]="['/orders/edit', order.id]" class="btn btn-sm btn-outline-primary me-2">Szerkesztés</a>
-        <button class="btn btn-sm btn-outline-danger" (click)="deleteOrder(order.id)">Törlés</button>
+        <button class="btn btn-sm btn-outline-primary me-2" (click)="deleteOrder(order.id)">Törlés</button>
 
       </div>
     </div>

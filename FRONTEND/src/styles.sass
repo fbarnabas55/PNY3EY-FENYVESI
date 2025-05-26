@@ -21,36 +21,64 @@ body.dark-theme
       transform: translateY(-2px)
       box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6)
 
-.glass-editor
-    background: rgba(20, 20, 20, 0.6)
-    backdrop-filter: blur(10px)
-    border: 1px solid rgba(255, 255, 255, 0.08)
-    border-radius: 1rem
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
+  .btn
+    background-color: #007bff
+    color: #ffffff
+    border: 1px solid rgba(0, 0, 0, 0.1)
 
-    input
-      background: rgba(30, 30, 30, 0.9)
-      border: 1px solid rgba(255, 255, 255, 0.1)
-      color: #f1f1f1
-      border-radius: 0.5rem
-      padding: 0.5rem 1rem
-      width: 100%
-      outline: none
+    &:hover
+      background-color: #0056b3
+      color: #ffffff
 
-      &::placeholder
-        color: #aaaaaa
+  .glass-editor
+      background: rgba(20, 20, 20, 0.6)
+      backdrop-filter: blur(10px)
+      border: 1px solid rgba(255, 255, 255, 0.08)
+      border-radius: 1rem
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
 
-      &:focus
-        border-color: #66b2ff
-        background: rgba(40, 40, 40, 1)
+      input
+        background: rgba(30, 30, 30, 0.9)
+        border: 1px solid rgba(255, 255, 255, 0.1)
+        color: #f1f1f1
+        border-radius: 0.5rem
+        padding: 0.5rem 1rem
+        width: 100%
+        outline: none
 
-    button
-      background-color: #0d6efd
-      color: white
-      border: none
+        &::placeholder
+          color: #aaaaaa
 
-      &:hover
-        background-color: #0b5ed7
+        &:focus
+          border-color: #66b2ff
+          background: rgba(40, 40, 40, 1)
+
+      button
+        background-color: #0d6efd
+        color: white
+        border: none
+
+        &:hover
+          background-color: #0b5ed7
+  .nav-link
+    color: #dddddd
+
+    i
+      color: #cccccc
+      transition: color 0.2s ease
+
+    span
+      transition: color 0.2s ease
+
+    &:hover
+      color: #66b2ff
+
+      i
+        color: #66b2ff
+
+      span
+        color: #66b2ff
+
 
     
     
@@ -67,6 +95,37 @@ body.light-theme
   .nav-container
     background: rgba(173, 216, 230, 0.9) // világoskék háttér
     border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+
+  .glass-editor
+      background: rgba(255, 255, 255, 0.8)
+      backdrop-filter: blur(10px)
+      border: 1px solid rgba(0, 0, 0, 0.05)
+      border-radius: 1rem
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+
+      input
+        background: #ffffff
+        border: 1px solid rgba(0, 0, 0, 0.1)
+        color: #1a1a1a
+        border-radius: 0.5rem
+        padding: 0.5rem 1rem
+        width: 100%
+        outline: none
+
+        &::placeholder
+          color: #888888
+
+        &:focus
+          border-color: #007bff
+          background: #f7f7f7
+
+      button
+        background-color: #007bff
+        color: white
+        border: none
+
+        &:hover
+          background-color: #0056b3
 
   .glass-card
     background: rgba(255, 255, 255, 0.6)
@@ -88,17 +147,21 @@ body.light-theme
       background-color: #0056b3
       color: #ffffff
 
-
-  .nav-link
+.nav-link
     color: #1a1a1a
-    transition: color 0.2s ease
 
     i
       color: #1a1a1a
+      transition: color 0.2s ease
+
+    span
       transition: color 0.2s ease
 
     &:hover
       color: #007bff
 
       i
+        color: #007bff
+
+      span
         color: #007bff

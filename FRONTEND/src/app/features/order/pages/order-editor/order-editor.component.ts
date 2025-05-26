@@ -23,7 +23,6 @@ export class OrderEditorComponent implements OnInit {
       installationAdress: [''],
       phoneNumber: [''],
       email: ['', [Validators.email]],
-      startDate: [new Date().toISOString().substring(0, 10), Validators.required],
       deadline: [new Date().toISOString().substring(0, 10), Validators.required],
     });
   }
