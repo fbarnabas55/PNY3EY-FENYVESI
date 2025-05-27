@@ -22,7 +22,7 @@ export class OrderEditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      id: ['', Validators.required],
+      id: [{ value: '', disabled: false }, Validators.required],
       orderName: ['', Validators.required],
       installationAdress: ['', Validators.required],
       phoneNumber: ['', Validators.required],
@@ -35,6 +35,7 @@ export class OrderEditorComponent implements OnInit {
     if (this.orderIdToEdit) {
       this.orderService.getOrderById(this.orderIdToEdit).subscribe(order => {
         this.form.patchValue(order);
+        this.form.get('id')?.disable();
       });
     }
   }
@@ -45,7 +46,9 @@ export class OrderEditorComponent implements OnInit {
       return;
     }
 
-    const formValue = this.form.value;
+    const formValue = {
+      ...this.form.getRawValue() // fontos: így megkapjuk a letiltott mezőt is
+    };
 
     if (!this.orderIdToEdit) {
       this.orderService.createOrder(formValue).subscribe(() => {
