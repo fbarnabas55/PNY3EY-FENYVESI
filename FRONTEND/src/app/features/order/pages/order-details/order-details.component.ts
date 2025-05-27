@@ -12,7 +12,8 @@ import { OrderService } from '../../services/order.service';
 
 
 export class OrderDetailsComponent implements OnInit {
-  order?: Order;
+  orderId: string = '';
+  orderName: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -20,12 +21,15 @@ export class OrderDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.orderService.getOrderById(id).subscribe(data => {
-        this.order = data;
-      });
-    }
+    this.orderId = this.route.snapshot.paramMap.get('id') ?? '';
+    this.loadOrder();
+  }
+
+  loadOrder(): void {
+    this.orderService.getOrderById(this.orderId).subscribe(order => {
+      this.orderName = order.orderName;
+      // ide később betöltjük a projektek és designokat is
+    });
   }
 }
 

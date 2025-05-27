@@ -1,24 +1,33 @@
-<div class="container py-4" *ngIf="order">
-  <div class="glass-card mb-4">
-    <h3>{{ order.orderName }}</h3>
-    <p><strong>Telepítési cím:</strong> {{ order.installationAdress }}</p>
-    <p><strong>Telefon:</strong> {{ order.phoneNumber }}</p>
-    <p><strong>Email:</strong> {{ order.email }}</p>
-    <p><strong>Határidő:</strong> {{ order.deadline | date }}</p>
-  </div>
+<div class="container py-4">
+  <h2 class="mb-4">{{ orderName }}</h2>
+  <div class="row">
+    <!-- Bal oszlop: Projektek -->
+    <div class="col-md-6">
+      <h4>Projektek</h4>
+      <!-- TODO: Projekt kártyák -->
+      <div class="card mb-3 text-muted text-center border-dashed">
+        <div class="card-body">
+          + Új projekt hozzáadása
+        </div>
+      </div>
+    </div>
 
-  <div *ngIf="order.projects?.length">
-    <h4 class="mb-3">Projektek</h4>
-    <div class="row g-3">
-      <div class="col-md-4" *ngFor="let project of order.projects">
-        <div class="glass-card">
-          <h6>{{ project.projectName }}</h6>
-          <p><strong>Projektvezető:</strong> {{ project.projectManager }}</p>
-          <p><strong>Ár:</strong> {{ project.price }} Ft</p>
-          <p><strong>Csomagigény:</strong> {{ project.packageDemand }}</p>
-          <p><strong>Indulás:</strong> {{ project.startDate | date }}</p>
+    <!-- Jobb oszlop: Sign Design -->
+    <div class="col-md-6">
+      <h4>Sign Design</h4>
+      <!-- TODO: SignDesign kártyák -->
+      <div class="card mb-3 text-muted text-center border-dashed">
+        <div class="card-body">
+          + Új design hozzáadása
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .border-dashed {
+    border: 2px dashed #ccc;
+    cursor: pointer;
+  }
+</style>

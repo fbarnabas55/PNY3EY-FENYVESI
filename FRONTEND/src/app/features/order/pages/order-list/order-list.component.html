@@ -7,7 +7,7 @@
       <input
         type="text"
         [(ngModel)]="searchTerm"
-        placeholder="Search by ID"
+        placeholder="Rendelés neve"
         class="form-control rounded-pill ps-5"
       />
       <i class="bi bi-search search-icon position-absolute"></i>
@@ -22,8 +22,8 @@
         <tr>
           <th class="text-uppercase">Rendelés neve</th>
           <th class="text-uppercase">Telepítési cím</th>
+          <th class="text-uppercase">Ügyfél Email</th>
           <th class="text-uppercase">Telefon</th>
-          <th class="text-uppercase">Email</th>
           <th class="text-uppercase">Határidő</th>
           <th class="text-uppercase">Művelet</th>
         </tr>
@@ -32,11 +32,12 @@
         <tr *ngFor="let order of filteredOrders()">
           <td>{{ order.orderName }}</td>
           <td>{{ order.installationAdress }}</td>
-          <td>{{ order.phoneNumber }}</td>
           <td>{{ order.email }}</td>
+          <td>{{ order.phoneNumber }}</td>
           <td>{{ order.deadline | date: 'shortDate' }}</td>
           <td>
-            <button class="btn btn-sm btn-primary me-2" [routerLink]="[order.id]">Részletek</button>
+            <button class="btn btn-sm btn-primary me-2" [routerLink]="['/orders', order.id, 'details']">
+              <i class="bi bi-three-dots"></i></button>
             <button class="btn btn-sm btn-warning me-2" [routerLink]="['/orders/edit', order.id]">
               <i class="bi bi-pencil"></i>
             </button>

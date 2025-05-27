@@ -37,7 +37,7 @@ export class OrderListComponent implements OnInit {
     }
 
     return this.orders.filter(order =>
-      order.id.toLowerCase().includes(this.searchTerm.toLowerCase())
+      order.orderName.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
