@@ -2,37 +2,43 @@
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="glass-editor p-4">
     <h3>Új rendelés</h3>
 
-
     <div class="mb-3">
-      <label for="id">Rendelés ID</label>
-      <input id="id" formControlName="id" class="form-control" />
+      <label for="id">Rendelés azonosító</label>
+      <input id="id" formControlName="id" class="form-control" [ngClass]="{'is-invalid': form.get('id')?.invalid && form.get('id')?.touched}" />
     </div>
 
     <div class="mb-3">
       <label for="orderName">Rendelés neve</label>
-      <input id="orderName" formControlName="orderName" class="form-control" />
+      <input id="orderName" formControlName="orderName" class="form-control" [ngClass]="{'is-invalid': form.get('orderName')?.invalid && form.get('orderName')?.touched}" />
     </div>
 
     <div class="mb-3">
       <label for="installationAdress">Telepítési cím</label>
-      <input id="installationAdress" formControlName="installationAdress" class="form-control" />
+      <input id="installationAdress" formControlName="installationAdress" class="form-control" [ngClass]="{'is-invalid': form.get('installationAdress')?.invalid && form.get('installationAdress')?.touched}" />
     </div>
 
     <div class="mb-3">
       <label for="phoneNumber">Telefonszám</label>
-      <input id="phoneNumber" formControlName="phoneNumber" class="form-control" />
+      <input id="phoneNumber" formControlName="phoneNumber" class="form-control" [ngClass]="{'is-invalid': form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched}" />
     </div>
 
     <div class="mb-3">
       <label for="email">Email</label>
-      <input id="email" type="email" formControlName="email" class="form-control" />
+      <input id="email" type="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid': form.get('email')?.invalid && form.get('email')?.touched}" />
     </div>
 
     <div class="mb-3">
       <label for="deadline">Határidő</label>
-      <input id="deadline" type="datetime-local" formControlName="deadline" class="form-control" />
+      <input id="deadline" type="datetime-local" formControlName="deadline" class="form-control" [ngClass]="{'is-invalid': form.get('deadline')?.invalid && form.get('deadline')?.touched}" />
     </div>
 
     <button type="submit" class="btn btn-primary mt-3">Mentés</button>
   </form>
 </div>
+
+<style>
+  .is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+</style>
