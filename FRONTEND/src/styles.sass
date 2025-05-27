@@ -1,167 +1,165 @@
-body.dark-theme
-  background-color: #121212
-  color: #f1f1f1
+// styles.sass
 
-  a, p, h1, h2, h3, h4, h5, h6, span, label, div, input, button
-    color: #f1f1f1
+// ==== Színváltozók ====
+$light-bg: #ffffff
+$light-text: #000000
+$light-nav: #cce5ff
+$light-thead: #b3d7ff
+$light-border: #dee2e6
 
-  .nav-container
-    background: rgba(30, 60, 90, 0.7) // sötétkék háttér
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1)
+$dark-bg: #000000
+$dark-text: #ffffff
+$dark-nav: #002244
+$dark-thead: #003366
+$dark-border: #333
 
-  .glass-card
-    background: rgba(255, 255, 255, 0.05)
-    backdrop-filter: blur(12px)
-    border: 1px solid rgba(255, 255, 255, 0.1)
-    border-radius: 1rem
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4)
-    transition: all 0.3s ease
+$primary-color: #0d6efd
+$warning-color: #ffc107
+$danger-color: #dc3545
+$success-color: #198754
 
-    &:hover
-      transform: translateY(-2px)
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6)
+// ==== Alap body beállítások ====
+body
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif
+  margin: 0
+  padding: 0
 
-  .btn
-    background-color: #007bff
-    color: #ffffff
-    border: 1px solid rgba(0, 0, 0, 0.1)
+  &.light-theme
+    background-color: $light-bg
+    color: $light-text
 
-    &:hover
-      background-color: #0056b3
-      color: #ffffff
+  &.dark-theme
+    background-color: $dark-bg
+    color: $dark-text
 
-  .glass-editor
-      background: rgba(20, 20, 20, 0.6)
-      backdrop-filter: blur(10px)
-      border: 1px solid rgba(255, 255, 255, 0.08)
-      border-radius: 1rem
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3)
-
-      input
-        background: rgba(30, 30, 30, 0.9)
-        border: 1px solid rgba(255, 255, 255, 0.1)
-        color: #f1f1f1
-        border-radius: 0.5rem
-        padding: 0.5rem 1rem
-        width: 100%
-        outline: none
-
-        &::placeholder
-          color: #aaaaaa
-
-        &:focus
-          border-color: #66b2ff
-          background: rgba(40, 40, 40, 1)
-
-      button
-        background-color: #0d6efd
-        color: white
-        border: none
-
-        &:hover
-          background-color: #0b5ed7
-  .nav-link
-    color: #dddddd
-
-    i
-      color: #cccccc
-      transition: color 0.2s ease
-
-    span
-      transition: color 0.2s ease
-
-    &:hover
-      color: #66b2ff
-
-      i
-        color: #66b2ff
-
-      span
-        color: #66b2ff
-
-
-    
-    
-
-
+// ==== Nav-sáv ====
+.navbar, .nav-container
+  transition: background-color 0.3s ease
 
 body.light-theme
-  background-color: #ffffff
-  color: #1a1a1a
+  .navbar, .nav-container
+    background-color: $light-nav !important
+    color: $light-text !important
 
-  a, p, h1, h2, h3, h4, h5, h6, span, label, div, input, button
-    color: #1a1a1a
+body.dark-theme
+  .navbar, .nav-container
+    background-color: $dark-nav !important
+    color: $dark-text !important
 
-  .nav-container
-    background: rgba(173, 216, 230, 0.9) // világoskék háttér
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+// ==== Táblázat stílusok ====
 
-  .glass-editor
-      background: rgba(255, 255, 255, 0.8)
-      backdrop-filter: blur(10px)
-      border: 1px solid rgba(0, 0, 0, 0.05)
-      border-radius: 1rem
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1)
+.table-responsive
+  border-radius: 0.5rem
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15)
+  overflow: hidden
+  border: 1px solid #ccc
 
-      input
-        background: #ffffff
-        border: 1px solid rgba(0, 0, 0, 0.1)
-        color: #1a1a1a
-        border-radius: 0.5rem
-        padding: 0.5rem 1rem
-        width: 100%
-        outline: none
+.custom-table
+  margin-bottom: 0
+  border-radius: 0.5rem
+  overflow: hidden
 
-        &::placeholder
-          color: #888888
+  thead th
+    text-transform: uppercase
+    font-weight: 600
+    vertical-align: middle
 
-        &:focus
-          border-color: #007bff
-          background: #f7f7f7
+    td, th
+      padding: 1rem
+      vertical-align: middle
+      word-wrap: break-word
 
-      button
-        background-color: #007bff
-        color: white
-        border: none
+body.light-theme
+  .custom-table
+    thead th
+      background-color: $light-thead !important
+      color: $light-text !important
+    tbody td
+      background-color: $light-bg !important
+      color: $light-text !important
 
-        &:hover
-          background-color: #0056b3
+// ===== Sötét téma =====
+body.dark-theme
+  .table-responsive
+    border-color: #444
 
-  .glass-card
-    background: rgba(255, 255, 255, 0.6)
-    backdrop-filter: blur(12px)
-    border: 1px solid rgba(0, 0, 0, 0.05)
-    border-radius: 1rem
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
-    transition: all 0.3s ease
+  .custom-table
+    
+      thead
+        th
+          background-color: #003366 
+          color: #fff !important
+      tbody
+        tr
+          background-color: #000 !important
+          color: #fff
+        tr:hover
+          background-color: #111
 
-    &:hover
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15)
+// ==== Keresősáv ====
+.search-bar
+  width: 100%
+  max-width: 300px
+  position: relative
 
-  .btn
-    background-color: #007bff
-    color: #ffffff
-    border: 1px solid rgba(0, 0, 0, 0.1)
+  input
+    padding-left: 2.5rem
+    border-radius: 50px
+    border: 1px solid
+    transition: background-color 0.3s ease, color 0.3s ease
 
-    &:hover
-      background-color: #0056b3
-      color: #ffffff
+  .search-icon
+    position: absolute
+    top: 50%
+    left: 15px
+    transform: translateY(-50%)
+    pointer-events: none
 
-.nav-link
-    color: #1a1a1a
+body.light-theme
+  .search-bar
+    input
+      background-color: $light-bg !important
+      color: $light-text !important
+      border-color: $light-border !important
+    .search-icon
+      color: gray
 
-    i
-      color: #1a1a1a
-      transition: color 0.2s ease
+body.dark-theme
+  .search-bar
+    input
+      background-color: $dark-bg !important
+      color: $dark-text !important
+      border-color: $dark-border !important
+      
+      &::placeholder
+        color: rgba(255, 255, 255, 0.6) !important
+    .search-icon
+      color: $dark-text
 
-    span
-      transition: color 0.2s ease
+// ==== Gombok ====
+.btn-primary
+  background-color: $primary-color !important
+  border-color: $primary-color !important
+  color: white !important
 
-    &:hover
-      color: #007bff
+.btn-warning
+  background-color: $warning-color !important
+  border-color: $warning-color !important
+  color: black !important
 
-      i
-        color: #007bff
+.btn-danger
+  background-color: $danger-color !important
+  border-color: $danger-color !important
+  color: white !important
 
-      span
-        color: #007bff
+.btn-success
+  background-color: $success-color !important
+  border-color: $success-color !important
+  color: white !important
+
+// ==== Általános igazítások ====
+.container
+  padding-top: 2rem
+
+h3
+  margin: 0

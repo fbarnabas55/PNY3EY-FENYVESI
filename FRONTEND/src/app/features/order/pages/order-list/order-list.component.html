@@ -1,20 +1,51 @@
 <div class="container py-4">
-  <a routerLink="/orders/new" class="btn btn-success mb-3">+ Új rendelés</a>
-  <div class="row g-4">
-    <div class="col-md-4" *ngFor="let order of orders">
-      <div class="glass-card">
-        <h5>{{ order.orderName }}</h5>
-        <p><strong>Telepítési cím:</strong> {{ order.installationAdress }}</p>
-        <p><strong>Telefon:</strong> {{ order.phoneNumber }}</p>
-        <p><strong>Email:</strong> {{ order.email }}</p>
-        <p><strong>Határidő:</strong> {{ order.deadline | date }}</p>
-        <p><strong>Kezdés:</strong> {{ order.startDate | date }}</p>
-
-        <a [routerLink]="[order.id]" class="btn btn-sm btn-outline-primary me-2">Részletek</a>
-        <a [routerLink]="['/orders/edit', order.id]" class="btn btn-sm btn-outline-primary me-2"><i class="bi bi-pencil"></i> Szerkesztés</a>
-        <button class="btn btn-sm btn-outline-primary me-2" (click)="deleteOrder(order.id)">Törlés</button>
-
-      </div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-success" routerLink="/orders/new">
+      + Új rendelés
+    </button>
+    <div class="search-bar position-relative">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search by ID"
+        class="form-control rounded-pill ps-5"
+      />
+      <i class="bi bi-search search-icon position-absolute"></i>
     </div>
+  </div>
+
+  <div class="table-responsive shadow rounded overflow-hidden border">
+    <table 
+      class="table table-bordered table-hover table-striped table-sm align-middle text-center custom-table mb-0 rounded"
+      [ngClass]="isDark ? 'table-dark' : 'table-light'">
+      <thead class="align-middle">
+        <tr>
+          <th class="text-uppercase">Rendelés neve</th>
+          <th class="text-uppercase">Telepítési cím</th>
+          <th class="text-uppercase">Telefon</th>
+          <th class="text-uppercase">Email</th>
+          <th class="text-uppercase">Határidő</th>
+          <th class="text-uppercase">Művelet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of filteredOrders()">
+          <td>{{ order.orderName }}</td>
+          <td>{{ order.installationAdress }}</td>
+          <td>{{ order.phoneNumber }}</td>
+          <td>{{ order.email }}</td>
+          <td>{{ order.deadline | date: 'shortDate' }}</td>
+          <td>
+            <button class="btn btn-sm btn-primary me-2" [routerLink]="[order.id]">Részletek</button>
+            <button class="btn btn-sm btn-warning me-2" [routerLink]="['/orders/edit', order.id]">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteOrder(order.id)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

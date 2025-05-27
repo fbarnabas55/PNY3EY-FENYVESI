@@ -28,4 +28,31 @@ export class OrderListComponent implements OnInit {
     } 
   }
 
+
+  searchTerm: string = '';
+
+  filteredOrders(): Order[] {
+    if (!this.searchTerm.trim()) {
+      return this.orders;
+    }
+
+    return this.orders.filter(order =>
+      order.id.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  isDark = false;
+
+  toggleTheme(): void {
+  this.isDark = !this.isDark;
+
+  // ezután váltjuk a body class-okat
+  const body = document.body;
+  body.classList.remove('dark-theme', 'light-theme');
+  body.classList.add(this.isDark ? 'dark-theme' : 'light-theme');
 }
+
+
+}
+
+

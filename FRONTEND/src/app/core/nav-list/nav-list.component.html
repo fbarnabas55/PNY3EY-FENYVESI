@@ -1,25 +1,18 @@
-<nav class="nav-container d-flex justify-content-between align-items-center px-4 py-3">
+<nav
+  class="navbar nav-container d-flex justify-content-between align-items-center px-4 py-3"
+  [ngClass]="isDark ? 'dark-theme' : 'light-theme'"
+>
+
   <!-- Bal oldal -->
   <div class="d-flex align-items-center gap-4">
     <a routerLink="/orders" class="nav-link d-flex align-items-center gap-2">
       <i class="bi bi-ui-checks"></i>
-      <span>Megrendelések</span>
+      <span>Rendelések</span>
     </a>
   </div>
 
   <!-- Jobb oldal -->
-  <div class="d-flex align-items-center gap-3">
-    <div class="search-bar position-relative">
-      <input
-        type="text"
-        [(ngModel)]="searchTerm"
-        (input)="onSearchChange()"
-        placeholder="Search by ID"
-        class="form-control rounded-pill ps-5"
-      />
-      <i class="bi bi-search search-icon position-absolute"></i>
-    </div>
-
+  <div>
     <button class="btn-sm toggle-theme-btn" (click)="toggleTheme()" title="Téma váltás">
       <i class="bi" [ngClass]="isDark ? 'bi-sun' : 'bi-moon'"></i>
     </button>
