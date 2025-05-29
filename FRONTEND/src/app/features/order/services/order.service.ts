@@ -48,7 +48,7 @@ export class OrderService {
 
   updateProject(project: Project, packageDemand: string): Observable<void> {
     const params = { packageDemand };
-    return this.http.put<void>(`/api/Project/${project.id}`, project, { params });
+    return this.http.put<void>(`${this.baseUrl}/Project/${project.id}`, project, { params });
   }
 
 }
