@@ -37,9 +37,7 @@ export interface Project {
   description: string;
   projectManager: string;
   price: number;
-  packageDemand: PackageDemand;
-  startDate: string; // ISO dátum string, pl. "2025-05-18T00:00:00"
-  projects?: Project[];
+  packageDemand: 'Boxed' | 'Foiled' | 'Stocked';
 }
 
 
