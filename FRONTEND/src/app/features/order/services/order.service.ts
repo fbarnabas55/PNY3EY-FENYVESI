@@ -45,6 +45,12 @@ export class OrderService {
   deleteProject(projectId: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/Project/${projectId}`);
   }
+
+  updateProject(project: Project, packageDemand: string): Observable<void> {
+    const params = { packageDemand };
+    return this.http.put<void>(`/api/Project/${project.id}`, project, { params });
+  }
+
 }
 
 

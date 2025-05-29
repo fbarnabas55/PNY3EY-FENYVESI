@@ -4,10 +4,28 @@
     <!-- Bal oszlop: Projektek -->
     <div class="col-md-6">
       <h4>Projektek</h4>
-      <!-- TODO: Projekt kártyák -->
-      <div class="card mb-3 text-muted text-center border-dashed">
+
+      <div *ngFor="let project of projects" class="card mb-3">
         <div class="card-body">
-          + Új projekt hozzáadása
+          <h5 class="card-title">{{ project.projectName }}</h5>
+          <p class="card-text">{{ project.description }}</p>
+          <span class="badge bg-secondary">{{ project.packageDemand }}</span>
+
+          <div class="mt-2">
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="openEditModal(project)">
+              <i class="bi bi-pencil"></i> Szerkesztés
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(project)">
+              <i class="bi bi-trash"></i> Törlés
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fantomkártya új projekthez -->
+      <div class="card mb-3 text-muted text-center border-dashed" (click)="openNewProjectModal()">
+        <div class="card-body">
+          <i class="bi bi-plus-circle"></i> Új projekt hozzáadása
         </div>
       </div>
     </div>
@@ -25,9 +43,100 @@
   </div>
 </div>
 
+<!-- Modal: Új projekt létrehozása -->
+<div class="modal fade" id="newProjectModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Új projekt létrehozása</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #newForm="ngForm">
+          <div class="mb-3">
+            <label>Projekt neve</label>
+            <input [(ngModel)]="newProject.projectName" name="projectName" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.projectName }" />
+          </div>
+          <div class="mb-3">
+            <label>Leírás</label>
+            <textarea [(ngModel)]="newProject.description" name="description" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.description }"></textarea>
+          </div>
+          <div class="mb-3">
+            <label>Projektmenedzser</label>
+            <input [(ngModel)]="newProject.projectManager" name="projectManager" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.projectManager }" />
+          </div>
+          <div class="mb-3">
+            <label>Ár (Ft)</label>
+            <input type="number" [(ngModel)]="newProject.price" name="price" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.price }" />
+          </div>
+          <div class="mb-3">
+            <label>Csomagolás típusa</label>
+            <select [(ngModel)]="newProject.packageDemand" name="packageDemand" required class="form-select" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.packageDemand }">
+              <option value="">Válassz csomagolást</option>
+              <option value="Foiled">Foiled</option>
+              <option value="Boxed">Boxed</option>
+              <option value="Stocked">Stocked</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+        <button type="button" class="btn btn-primary" (click)="createProject(newForm)">Mentés</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal: Szerkesztés -->
+<div class="modal fade" id="projectModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Projekt szerkesztése</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedProject">
+        <div class="mb-3">
+          <label>Projekt neve</label>
+          <input [(ngModel)]="selectedProject.projectName" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label>Leírás</label>
+          <textarea [(ngModel)]="selectedProject.description" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+          <label>Projektmenedzser</label>
+          <input [(ngModel)]="selectedProject.projectManager" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label>Ár (Ft)</label>
+          <input type="number" [(ngModel)]="selectedProject.price" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label>Csomagolás típusa</label>
+          <select [(ngModel)]="selectedProject.packageDemand" class="form-select">
+            <option value="Foiled">Foiled</option>
+            <option value="Boxed">Boxed</option>
+            <option value="Stocked">Stocked</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelEdit()">Elvetés</button>
+        <button type="button" class="btn btn-primary" (click)="saveProject()">Mentés</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <style>
   .border-dashed {
     border: 2px dashed #ccc;
     cursor: pointer;
+  }
+  .is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
   }
 </style>
