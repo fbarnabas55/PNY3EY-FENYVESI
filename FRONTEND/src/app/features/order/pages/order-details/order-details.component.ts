@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../../services/order.service';
-import { Project } from '../../order.module';
+import { Project, SignDesign } from '../../order.module';
 import { Modal } from 'bootstrap';
 
 @Component({
@@ -113,6 +113,85 @@ export class OrderDetailsComponent implements OnInit {
       this.loadProjects();
     });
   }
+
+  //////////////////////DESIGNS////////////////////////////////////
+
+
+
+   signDesigns: SignDesign[] = [];
+
+  selectedDesign: SignDesign | null = null;
+  newDesign: SignDesign = {
+    orderId: '',
+    description: '',
+    fixing: '',
+    decor: '',
+    width: 0,
+    height: 0,
+    material: 'Metal',
+    brightness: 'Medium',
+    lightings: 'LED'
+  };
+
+  designNgOnInit(): void {
+    this.orderId = this.route.snapshot.paramMap.get('id')!;
+    this.loadOrder();
+    this.loadProjects();
+    this.loadDesigns(); // új
+  }
+
+  loadDesigns(): void {
+    this.orderService.getSignDesigns(this.orderId).subscribe(data => {
+      this.signDesigns = data;
+    });
+  }
+
+  openNewDesignModal(): void {
+    this.newDesign = {
+      orderId: this.orderId,
+      description: '',
+      fixing: '',
+      decor: '',
+      width: 0,
+      height: 0,
+      material: 'Metal',
+      brightness: 'Medium',
+      lightings: 'LED'
+    };
+    const modal = document.getElementById('newDesignModal');
+    if (modal) new Modal(modal).show();
+  }
+
+  createDesign(form: any): void {
+    if (!form.valid) return;
+    this.orderService.createSignDesign(this.newDesign).subscribe(() => {
+      this.loadDesigns();
+      form.resetForm();
+      Modal.getInstance(document.getElementById('newDesignModal')!)?.hide();
+    });
+  }
+
+  openEditDesignModal(design: SignDesign): void {
+    this.selectedDesign = { ...design };
+    const modal = document.getElementById('editDesignModal');
+    if (modal) new Modal(modal).show();
+  }
+
+  saveDesign(): void {
+    if (!this.selectedDesign) return;
+    this.orderService.updateSignDesign(this.selectedDesign).subscribe(() => {
+      this.loadDesigns();
+      Modal.getInstance(document.getElementById('editDesignModal')!)?.hide();
+      this.selectedDesign = null;
+    });
+  }
+
+  confirmDeleteDesign(design: SignDesign): void {
+    if (confirm(`Biztosan törlöd a "${design.description}" design-t?`)) {
+      this.orderService.deleteSignDesign(design.id!).subscribe(() => this.loadDesigns());
+    }
+  }
+
 }
 
 

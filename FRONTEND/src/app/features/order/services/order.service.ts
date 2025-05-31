@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Order, Project } from '../order.module';
+import { Order, Project, SignDesign } from '../order.module';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,8 @@ export class OrderService {
     return this.http.delete<void>(`${this.baseUrl}/Order/${id}`);
   }
 
-  // Project műveletek
+  // Project műveletek///////////////////////////////////////////////////////
+
   getProjects(orderId: string): Observable<Project[]> {
     return this.http.get<Project[]>(`${this.baseUrl}/Project/order/${orderId}`);
   }
@@ -50,6 +51,30 @@ export class OrderService {
     const params = { packageDemand };
     return this.http.put<void>(`${this.baseUrl}/Project/${project.id}`, project, { params });
   }
+
+
+  // SignDesign műveletek
+  getSignDesigns(orderId: string): Observable<SignDesign[]> {
+    return this.http.get<SignDesign[]>(`${this.baseUrl}/SignDesign/order/${orderId}`);
+  }
+
+  createSignDesign(design: SignDesign): Observable<SignDesign> {
+    const params = {
+      lightings: design.lightings,
+      brightness: design.brightness,
+      material: design.material
+    };
+    return this.http.post<SignDesign>(`${this.baseUrl}/SignDesign`, design, { params });
+  }
+
+  updateSignDesign(design: SignDesign): Observable<void> {
+    return this.http.put<void>(`${this.baseUrl}/SignDesign/${design.id}`, design);
+  }
+
+  deleteSignDesign(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/SignDesign/${id}`);
+  }
+
 
 }
 

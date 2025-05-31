@@ -37,15 +37,111 @@
     <!-- Jobb oszlop: Sign Design -->
     <div class="col-md-6">
       <h4>Sign Design</h4>
-      <!-- TODO: SignDesign kártyák -->
-      <div class="card mb-3 text-muted text-center border-dashed">
+
+      <div *ngFor="let design of signDesigns" class="card mb-3">
         <div class="card-body">
-          + Új design hozzáadása
+          <h5 class="card-title mb-1">{{ design.description }}</h5>
+          <p class="card-text">Dekor: {{ design.decor }}</p>
+          <p class="card-text">Rögzítés: {{ design.fixing }}</p>
+          <p class="card-text">Méret: {{ design.width }} x {{ design.height }} cm</p>
+
+          <!-- Badge-ek -->
+          <div class="mt-2">
+            <span class="badge bg-info me-1">{{ design.material }}</span>
+            <span class="badge bg-warning text-dark me-1">{{ design.brightness }}</span>
+            <span class="badge bg-secondary">{{ design.lightings }}</span>
+          </div>
+
+          <!-- Műveletek -->
+          <div class="mt-3">
+            <button class="btn btn-sm btn-outline-primary me-2" (click)="openEditDesignModal(design)">
+              <i class="bi bi-pencil"></i> Szerkesztés
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDeleteDesign(design)">
+              <i class="bi bi-trash"></i> Törlés
+            </button>
+          </div>
         </div>
+      </div>
+
+      <!-- Fantomkártya új designhoz -->
+      <div class="card mb-3 text-muted text-center border-dashed" (click)="openNewDesignModal()">
+        <div class="card-body">
+          <i class="bi bi-plus-circle"></i> Új design hozzáadása
+        </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal: Új Design létrehozása -->
+<div class="modal fade" id="newDesignModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Új Design</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form #newDesignForm="ngForm">
+          <div class="mb-3">
+            <label>Leírás</label>
+            <input [(ngModel)]="newDesign.description" name="description" required class="form-control"
+              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.description}" />
+          </div>
+          <div class="mb-3">
+            <label>Dekor</label>
+            <input [(ngModel)]="newDesign.decor" name="decor" required class="form-control"
+              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.decor}" />
+          </div>
+          <div class="mb-3">
+            <label>Rögzítés</label>
+            <input [(ngModel)]="newDesign.fixing" name="fixing" required class="form-control"
+              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.fixing}" />
+          </div>
+          <div class="mb-3">
+            <label>Szélesség (cm)</label>
+            <input type="number" [(ngModel)]="newDesign.width" name="width" required class="form-control"
+              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.width}" />
+          </div>
+          <div class="mb-3">
+            <label>Magasság (cm)</label>
+            <input type="number" [(ngModel)]="newDesign.height" name="height" required class="form-control"
+              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.height}" />
+          </div>
+          <div class="mb-3">
+            <label>Anyag</label>
+            <select [(ngModel)]="newDesign.material" name="material" class="form-select" required>
+              <option value="Metal">Fém</option>
+              <option value="Plastic">Műanyag</option>
+              <option value="Wood">Fa</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Fényerő</label>
+            <select [(ngModel)]="newDesign.brightness" name="brightness" class="form-select" required>
+              <option value="Low">Alacsony</option>
+              <option value="Medium">Közepes</option>
+              <option value="High">Erős</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Világítás</label>
+            <select [(ngModel)]="newDesign.lightings" name="lightings" class="form-select" required>
+              <option value="LED">LED</option>
+              <option value="Neon">Neon</option>
+              <option value="None">Nincs</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+        <button type="button" class="btn btn-primary" (click)="createDesign(newDesignForm)">Mentés</button>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- Modal: Új projekt létrehozása -->
 <div class="modal fade" id="newProjectModal" tabindex="-1">

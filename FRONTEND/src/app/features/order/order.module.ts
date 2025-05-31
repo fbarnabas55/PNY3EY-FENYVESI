@@ -24,11 +24,7 @@ import { OrderEditorComponent } from './pages/order-editor/order-editor.componen
 })
 export class OrderModule { }
 
-export enum PackageDemand {
-  Foiled = 0,
-  Boxed = 1,
-  Stocked = 2
-}
+
 
 export interface Project {
   id?: string;
@@ -39,6 +35,21 @@ export interface Project {
   price: number;
   packageDemand: 'Boxed' | 'Foiled' | 'Stocked';
 }
+
+
+export interface SignDesign {
+  id?: string;
+  orderId: string;
+  description: string;
+  fixing: string;
+  decor: string;
+  width: number;
+  height: number;
+  material: 'Metal' | 'Plastic' | 'Wood';
+  brightness: 'Low' | 'Medium' | 'High';
+  lightings: 'LED' | 'Neon' | 'None';
+}
+
 
 
 
