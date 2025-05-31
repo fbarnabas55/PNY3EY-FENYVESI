@@ -7,8 +7,12 @@
 
       <div *ngFor="let project of projects" class="card mb-3">
         <div class="card-body">
-          <h5 class="card-title">{{ project.projectName }}</h5>
+          <div class="d-flex justify-content-between align-items-start">
+            <h5 class="card-title mb-1">{{ project.projectName }}</h5>
+            <span class="fw-bold">{{ project.price }} Ft</span>
+          </div>
           <p class="card-text">{{ project.description }}</p>
+          <p class="card-text"><strong>Projektmenedzser:</strong> {{ project.projectManager }}</p>
           <span class="badge bg-secondary">{{ project.packageDemand }}</span>
 
           <div class="mt-2">
@@ -47,43 +51,43 @@
 <div class="modal fade" id="newProjectModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Új projekt létrehozása</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form #newForm="ngForm">
+      <form #newForm="ngForm" (ngSubmit)="createProject(newForm)">
+        <div class="modal-header">
+          <h5 class="modal-title">Új projekt létrehozása</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
           <div class="mb-3">
             <label>Projekt neve</label>
-            <input [(ngModel)]="newProject.projectName" name="projectName" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.projectName }" />
+            <input [(ngModel)]="newProject.projectName" name="projectName" required class="form-control" #projectNameCtrl="ngModel" [ngClass]="{ 'is-invalid': projectNameCtrl.invalid && (projectNameCtrl.touched || newForm.submitted) }" />
           </div>
           <div class="mb-3">
             <label>Leírás</label>
-            <textarea [(ngModel)]="newProject.description" name="description" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.description }"></textarea>
+            <textarea [(ngModel)]="newProject.description" name="description" required class="form-control" #descriptionCtrl="ngModel" [ngClass]="{ 'is-invalid': descriptionCtrl.invalid && (descriptionCtrl.touched || newForm.submitted) }"></textarea>
           </div>
           <div class="mb-3">
             <label>Projektmenedzser</label>
-            <input [(ngModel)]="newProject.projectManager" name="projectManager" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.projectManager }" />
+            <input [(ngModel)]="newProject.projectManager" name="projectManager" required class="form-control" #projectManagerCtrl="ngModel" [ngClass]="{ 'is-invalid': projectManagerCtrl.invalid && (projectManagerCtrl.touched || newForm.submitted) }" />
           </div>
           <div class="mb-3">
             <label>Ár (Ft)</label>
-            <input type="number" [(ngModel)]="newProject.price" name="price" required class="form-control" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.price }" />
+            <input type="number" [(ngModel)]="newProject.price" name="price" required class="form-control" #priceCtrl="ngModel" [ngClass]="{ 'is-invalid': priceCtrl.invalid && (priceCtrl.touched || newForm.submitted) }" />
           </div>
           <div class="mb-3">
             <label>Csomagolás típusa</label>
-            <select [(ngModel)]="newProject.packageDemand" name="packageDemand" required class="form-select" [ngClass]="{ 'is-invalid': newForm.submitted && !newProject.packageDemand }">
+            <select [(ngModel)]="newProject.packageDemand" name="packageDemand" required class="form-select" #packageDemandCtrl="ngModel" [ngClass]="{ 'is-invalid': packageDemandCtrl.invalid && (packageDemandCtrl.touched || newForm.submitted) }">
               <option value="">Válassz csomagolást</option>
               <option value="Foiled">Foiled</option>
               <option value="Boxed">Boxed</option>
               <option value="Stocked">Stocked</option>
             </select>
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
-        <button type="button" class="btn btn-primary" (click)="createProject(newForm)">Mentés</button>
-      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+          <button type="submit" class="btn btn-primary">Mentés</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
@@ -92,40 +96,43 @@
 <div class="modal fade" id="projectModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Projekt szerkesztése</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" *ngIf="selectedProject">
-        <div class="mb-3">
-          <label>Projekt neve</label>
-          <input [(ngModel)]="selectedProject.projectName" class="form-control" />
+      <form #editForm="ngForm" *ngIf="selectedProject" (ngSubmit)="saveProject(editForm)">
+        <div class="modal-header">
+          <h5 class="modal-title">Projekt szerkesztése</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="mb-3">
-          <label>Leírás</label>
-          <textarea [(ngModel)]="selectedProject.description" class="form-control"></textarea>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Projekt neve</label>
+            <input name="projectName" [(ngModel)]="selectedProject.projectName" #projectNameEditCtrl="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': projectNameEditCtrl.invalid && (projectNameEditCtrl.touched || editForm.submitted) }" />
+          </div>
+          <div class="mb-3">
+            <label>Leírás</label>
+            <textarea name="description" [(ngModel)]="selectedProject.description" #descriptionEditCtrl="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': descriptionEditCtrl.invalid && (descriptionEditCtrl.touched || editForm.submitted) }"></textarea>
+          </div>
+          <div class="mb-3">
+            <label>Projektmenedzser</label>
+            <input name="projectManager" [(ngModel)]="selectedProject.projectManager" #projectManagerEditCtrl="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': projectManagerEditCtrl.invalid && (projectManagerEditCtrl.touched || editForm.submitted) }" />
+          </div>
+          <div class="mb-3">
+            <label>Ár (Ft)</label>
+            <input type="number" name="price" [(ngModel)]="selectedProject.price" #priceEditCtrl="ngModel" required class="form-control" [ngClass]="{ 'is-invalid': priceEditCtrl.invalid && (priceEditCtrl.touched || editForm.submitted) }" />
+          </div>
+          <div class="mb-3">
+            <label>Csomagolás típusa</label>
+            <select name="packageDemand" [(ngModel)]="selectedProject.packageDemand" #packageDemandEditCtrl="ngModel" required class="form-select" [ngClass]="{ 'is-invalid': packageDemandEditCtrl.invalid && (packageDemandEditCtrl.touched || editForm.submitted) }">
+              <option value="">Válassz csomagolást</option>
+              <option value="Foiled">Foiled</option>
+              <option value="Boxed">Boxed</option>
+              <option value="Stocked">Stocked</option>
+            </select>
+          </div>
         </div>
-        <div class="mb-3">
-          <label>Projektmenedzser</label>
-          <input [(ngModel)]="selectedProject.projectManager" class="form-control" />
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelEdit()">Elvetés</button>
+          <button type="submit" class="btn btn-primary">Mentés</button>
         </div>
-        <div class="mb-3">
-          <label>Ár (Ft)</label>
-          <input type="number" [(ngModel)]="selectedProject.price" class="form-control" />
-        </div>
-        <div class="mb-3">
-          <label>Csomagolás típusa</label>
-          <select [(ngModel)]="selectedProject.packageDemand" class="form-select">
-            <option value="Foiled">Foiled</option>
-            <option value="Boxed">Boxed</option>
-            <option value="Stocked">Stocked</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelEdit()">Elvetés</button>
-        <button type="button" class="btn btn-primary" (click)="saveProject()">Mentés</button>
-      </div>
+      </form>
     </div>
   </div>
 </div>

@@ -60,12 +60,23 @@ export class OrderDetailsComponent implements OnInit {
     this.selectedProject = null;
   }
 
-  saveProject(): void {
+  saveProject(form?: any): void {
     if (!this.selectedProject) return;
+
+    if (form && !form.valid) {
+      form.form.markAllAsTouched();
+      return;
+    }
+
     this.orderService.updateProject(this.selectedProject, this.selectedProject.packageDemand).subscribe(() => {
       this.loadProjects();
+      const modalElement = document.getElementById('projectModal');
+      if (modalElement) Modal.getInstance(modalElement)?.hide();
+      this.selectedProject = null;
     });
   }
+
+
 
   confirmDelete(project: Project): void {
     if (confirm(`Biztosan törölni szeretnéd a(z) "${project.projectName}" projektet?`)) {
@@ -74,6 +85,8 @@ export class OrderDetailsComponent implements OnInit {
       });
     }
   }
+
+  
 
   openNewProjectModal(): void {
     this.newProject = {
