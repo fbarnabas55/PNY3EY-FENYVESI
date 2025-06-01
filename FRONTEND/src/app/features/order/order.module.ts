@@ -21,7 +21,6 @@ import { NgChartsModule } from 'ng2-charts';
     OrderRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgChartsModule
     
 
   ]
