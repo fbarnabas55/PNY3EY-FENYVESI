@@ -1,6 +1,7 @@
 <div class="container py-4">
+  <h1 class="mb-4">Rendelések</h1>
   <div class="d-flex justify-content-between align-items-center mb-3">
-    <button class="btn btn-success" routerLink="/orders/new">
+    <button class="btn btn-primary" routerLink="/orders/new">
       + Új rendelés
     </button>
     <div class="search-bar position-relative">
@@ -34,7 +35,9 @@
           <td>{{ order.installationAdress }}</td>
           <td>{{ order.email }}</td>
           <td>{{ order.phoneNumber }}</td>
-          <td>{{ order.deadline | date: 'shortDate' }}</td>
+          <td [ngClass]="{'text-danger fw-bold': isExpiringSoon(order.deadline)}">
+            {{ order.deadline | date: 'shortDate' }}
+          </td>
           <td>
             <button class="btn btn-sm btn-primary me-2" [routerLink]="['/orders', order.id, 'details']">
               <i class="bi bi-three-dots"></i></button>

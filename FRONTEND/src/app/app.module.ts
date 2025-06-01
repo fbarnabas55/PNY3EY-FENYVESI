@@ -7,12 +7,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NavListComponent } from './core/nav-list/nav-list.component';
+import { StatisticsComponent } from './features/statistics/pages/statistics/statistics.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavListComponent
+    NavListComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,

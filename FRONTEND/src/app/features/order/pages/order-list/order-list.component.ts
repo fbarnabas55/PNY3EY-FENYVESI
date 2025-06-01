@@ -44,13 +44,21 @@ export class OrderListComponent implements OnInit {
   isDark = false;
 
   toggleTheme(): void {
-  this.isDark = !this.isDark;
+    this.isDark = !this.isDark;
 
-  // ezután váltjuk a body class-okat
-  const body = document.body;
-  body.classList.remove('dark-theme', 'light-theme');
-  body.classList.add(this.isDark ? 'dark-theme' : 'light-theme');
-}
+    // ezután váltjuk a body class-okat
+    const body = document.body;
+    body.classList.remove('dark-theme', 'light-theme');
+    body.classList.add(this.isDark ? 'dark-theme' : 'light-theme');
+  }
+
+  isExpiringSoon(deadline: string | Date): boolean {
+    const today = new Date();
+    const dueDate = new Date(deadline);
+    const diffTime = dueDate.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return diffDays <= 2;
+  }
 
 
 }

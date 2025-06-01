@@ -33,6 +33,7 @@ export class OrderDetailsComponent implements OnInit {
     this.orderId = this.route.snapshot.paramMap.get('id')!;
     this.loadOrder();
     this.loadProjects();
+    this.loadDesigns();
   }
 
   loadOrder(): void {
@@ -128,17 +129,12 @@ export class OrderDetailsComponent implements OnInit {
     decor: '',
     width: 0,
     height: 0,
-    material: 'Metal',
+    material: 'Steel',
     brightness: 'Medium',
     lightings: 'LED'
   };
 
-  designNgOnInit(): void {
-    this.orderId = this.route.snapshot.paramMap.get('id')!;
-    this.loadOrder();
-    this.loadProjects();
-    this.loadDesigns(); // új
-  }
+  
 
   loadDesigns(): void {
     this.orderService.getSignDesigns(this.orderId).subscribe(data => {
@@ -154,7 +150,7 @@ export class OrderDetailsComponent implements OnInit {
       decor: '',
       width: 0,
       height: 0,
-      material: 'Metal',
+      material: 'Steel',
       brightness: 'Medium',
       lightings: 'LED'
     };
@@ -177,14 +173,21 @@ export class OrderDetailsComponent implements OnInit {
     if (modal) new Modal(modal).show();
   }
 
-  saveDesign(): void {
+  saveDesign(form: any): void {
     if (!this.selectedDesign) return;
+
+    if (form && !form.valid) {
+      form.form.markAllAsTouched();
+      return;
+    }
+
     this.orderService.updateSignDesign(this.selectedDesign).subscribe(() => {
       this.loadDesigns();
       Modal.getInstance(document.getElementById('editDesignModal')!)?.hide();
       this.selectedDesign = null;
     });
   }
+
 
   confirmDeleteDesign(design: SignDesign): void {
     if (confirm(`Biztosan törlöd a "${design.description}" design-t?`)) {

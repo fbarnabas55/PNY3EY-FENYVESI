@@ -84,19 +84,39 @@
       <div class="modal-body">
         <form #newDesignForm="ngForm">
           <div class="mb-3">
-            <label>Leírás</label>
-            <input [(ngModel)]="newDesign.description" name="description" required class="form-control"
-              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.description}" />
+            <label>Név</label>
+            <input
+              [(ngModel)]="newDesign.description"
+              name="description"
+              #descriptionCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': descriptionCtrl.invalid && (descriptionCtrl.touched || newDesignForm.submitted) }"
+            />
           </div>
+
           <div class="mb-3">
             <label>Dekor</label>
-            <input [(ngModel)]="newDesign.decor" name="decor" required class="form-control"
-              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.decor}" />
+            <input
+              [(ngModel)]="newDesign.decor"
+              name="decor"
+              #decorCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': decorCtrl.invalid && (decorCtrl.touched || newDesignForm.submitted) }"
+            />
           </div>
+
           <div class="mb-3">
             <label>Rögzítés</label>
-            <input [(ngModel)]="newDesign.fixing" name="fixing" required class="form-control"
-              [ngClass]="{'is-invalid': newDesignForm.submitted && !newDesign.fixing}" />
+            <input
+              [(ngModel)]="newDesign.fixing"
+              name="fixing"
+              #fixingCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': fixingCtrl.invalid && (fixingCtrl.touched || newDesignForm.submitted) }"
+            />
           </div>
           <div class="mb-3">
             <label>Szélesség (cm)</label>
@@ -111,9 +131,10 @@
           <div class="mb-3">
             <label>Anyag</label>
             <select [(ngModel)]="newDesign.material" name="material" class="form-select" required>
-              <option value="Metal">Fém</option>
+              <option value="Steel">Fém</option>
+              <option value="Aluminium">Aluminium</option>
+              <option value="StainlessSteel">Rozsdamentes acél</option>
               <option value="Plastic">Műanyag</option>
-              <option value="Wood">Fa</option>
             </select>
           </div>
           <div class="mb-3">
@@ -129,7 +150,7 @@
             <select [(ngModel)]="newDesign.lightings" name="lightings" class="form-select" required>
               <option value="LED">LED</option>
               <option value="Neon">Neon</option>
-              <option value="None">Nincs</option>
+              <option value="Halogen">Halogen</option>
             </select>
           </div>
         </form>
@@ -188,7 +209,7 @@
   </div>
 </div>
 
-<!-- Modal: Szerkesztés -->
+<!-- Modal: Project Szerkesztés -->
 <div class="modal fade" id="projectModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -232,6 +253,130 @@
     </div>
   </div>
 </div>
+
+<!-- Modal: Szerkesztés -->
+<div class="modal fade" id="editDesignModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form #editDesignForm="ngForm">
+        <div class="modal-header">
+          <h5 class="modal-title">SignDesign szerkesztése</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Bezárás"></button>
+        </div>
+        <div class="modal-body" *ngIf="selectedDesign">
+          <div class="mb-3">
+            <label>Név</label>
+            <input
+              [(ngModel)]="selectedDesign.description"
+              name="editDescription"
+              #editDescriptionCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': editDescriptionCtrl.invalid && (editDescriptionCtrl.touched || editDesignForm.submitted) }"
+            />
+          </div>
+          <div class="mb-3">
+            <label>Dekor</label>
+            <input
+              [(ngModel)]="selectedDesign.decor"
+              name="editDecor"
+              #editDecorCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': editDecorCtrl.invalid && (editDecorCtrl.touched || editDesignForm.submitted) }"
+            />
+          </div>
+          <div class="mb-3">
+            <label>Rögzítés</label>
+            <input
+              [(ngModel)]="selectedDesign.fixing"
+              name="editFixing"
+              #editFixingCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': editFixingCtrl.invalid && (editFixingCtrl.touched || editDesignForm.submitted) }"
+            />
+          </div>
+          <div class="mb-3">
+            <label>Szélesség (cm)</label>
+            <input
+              type="number"
+              [(ngModel)]="selectedDesign.width"
+              name="editWidth"
+              #editWidthCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': editWidthCtrl.invalid && (editWidthCtrl.touched || editDesignForm.submitted) }"
+            />
+          </div>
+          <div class="mb-3">
+            <label>Magasság (cm)</label>
+            <input
+              type="number"
+              [(ngModel)]="selectedDesign.height"
+              name="editHeight"
+              #editHeightCtrl="ngModel"
+              required
+              class="form-control"
+              [ngClass]="{ 'is-invalid': editHeightCtrl.invalid && (editHeightCtrl.touched || editDesignForm.submitted) }"
+            />
+          </div>
+          <div class="mb-3">
+            <label>Anyag</label>
+            <select
+              [(ngModel)]="selectedDesign.material"
+              name="editMaterial"
+              #editMaterialCtrl="ngModel"
+              required
+              class="form-select"
+              [ngClass]="{ 'is-invalid': editMaterialCtrl.invalid && (editMaterialCtrl.touched || editDesignForm.submitted) }"
+            >
+              <option value="Steel">Fém</option>
+              <option value="Aluminium">Aluminium</option>
+              <option value="StainlessSteel">Rozsdamentes acél</option>
+              <option value="Plastic">Műanyag</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Fényerő</label>
+            <select
+              [(ngModel)]="selectedDesign.brightness"
+              name="editBrightness"
+              #editBrightnessCtrl="ngModel"
+              required
+              class="form-select"
+              [ngClass]="{ 'is-invalid': editBrightnessCtrl.invalid && (editBrightnessCtrl.touched || editDesignForm.submitted) }"
+            >
+              <option value="Low">Alacsony</option>
+              <option value="Medium">Közepes</option>
+              <option value="High">Erős</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label>Világítás</label>
+            <select
+              [(ngModel)]="selectedDesign.lightings"
+              name="editLightings"
+              #editLightingsCtrl="ngModel"
+              required
+              class="form-select"
+              [ngClass]="{ 'is-invalid': editLightingsCtrl.invalid && (editLightingsCtrl.touched || editDesignForm.submitted) }"
+            >
+              <option value="LED">LED</option>
+              <option value="Neon">Neon</option>
+              <option value="Halogen">Halogén</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cancelEdit()">Mégse</button>
+          <button type="submit" class="btn btn-primary" (click)="saveDesign(editDesignForm)">Mentés</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 
 <style>
   .border-dashed {

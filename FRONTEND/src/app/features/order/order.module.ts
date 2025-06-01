@@ -45,9 +45,9 @@ export interface SignDesign {
   decor: string;
   width: number;
   height: number;
-  material: 'Metal' | 'Plastic' | 'Wood';
+  material: 'Steel' | 'Aluminium' | 'StainlessSteel' | 'Plastic';
   brightness: 'Low' | 'Medium' | 'High';
-  lightings: 'LED' | 'Neon' | 'None';
+  lightings: 'LED' | 'Neon' | 'Halogen';
 }
 
 
