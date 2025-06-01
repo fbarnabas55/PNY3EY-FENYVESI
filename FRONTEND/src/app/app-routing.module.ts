@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrderEditorComponent } from './features/order/pages/order-editor/order-editor.component';
 import { OrderDetailsComponent } from './features/order/pages/order-details/order-details.component';
+import { StatisticsComponent } from './features/statistics/pages/statistics/statistics.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,8 @@ const routes: Routes = [
 
   
   { path: 'orders/:id/details', component: OrderDetailsComponent },
+
+  {path:'statistics', component: StatisticsComponent},
 
   
 
