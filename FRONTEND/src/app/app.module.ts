@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { NavListComponent } from './core/nav-list/nav-list.component';
+import { NgChartsModule } from 'ng2-charts';
 import { StatisticsComponent } from './features/statistics/pages/statistics/statistics.component';
 
 
@@ -20,7 +20,9 @@ import { StatisticsComponent } from './features/statistics/pages/statistics/stat
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgChartsModule
+    
   ],
   bootstrap: [AppComponent]
 })

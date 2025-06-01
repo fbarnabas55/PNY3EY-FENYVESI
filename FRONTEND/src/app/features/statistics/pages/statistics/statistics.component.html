@@ -1,1 +1,38 @@
-<p>statistics works!</p>
+<div class="container py-4">
+  <h2 class="mb-4">Statisztikák</h2>
+
+  <div class="row">
+    <!-- Legnagyobb rendelés -->
+    <div class="col-md-6 mb-4">
+      <div class="card p-3 shadow glass-card">
+        <h5>Hónap legnagyobb rendelése</h5>
+        <p><strong>{{ maxOrder?.orderName }}</strong></p>
+        <p class="text-success fw-bold">{{ maxOrder?.totalPrice | currency:'HUF':'symbol':'1.0-0' }}</p>
+      </div>
+    </div>
+
+    <!-- Oszlopdiagram: rendelés darabszám -->
+    <div class="col-md-6 mb-4">
+      <div class="card p-3 shadow glass-card">
+        <h5>Rendelések száma havonta</h5>
+        <canvas baseChart
+          [data]="ordersPerMonthChartData"
+          [labels]="ordersPerMonthLabels"
+          [chartType]="'bar'">
+        </canvas>
+      </div>
+    </div>
+
+    <!-- Kördiagram: legtöbb projekt -->
+    <div class="col-md-6 mb-4">
+      <div class="card p-3 shadow glass-card">
+        <h5>Rendelés a legtöbb projekttel</h5>
+        <canvas baseChart
+          [data]="projectCountChartData"
+          [labels]="projectCountLabels"
+          [chartType]="'doughnut'">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>

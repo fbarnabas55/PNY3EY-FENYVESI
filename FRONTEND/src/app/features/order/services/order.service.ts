@@ -76,6 +76,20 @@ export class OrderService {
   }
 
 
+  getMaxOrderThisMonth(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Order/stats/max-order-current-month`);
+  }
+
+  getOrdersPerMonth(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/Order/stats/orders-per-month`);
+  }
+
+  getOrderWithMostProjectsThisMonth(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Order/stats/top-project-order`);
+  }
+
+
+
 }
 
 

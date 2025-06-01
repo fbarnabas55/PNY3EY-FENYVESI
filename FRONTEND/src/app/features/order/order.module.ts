@@ -20,6 +20,8 @@ import { OrderEditorComponent } from './pages/order-editor/order-editor.componen
     OrderRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    
+
   ]
 })
 export class OrderModule { }
