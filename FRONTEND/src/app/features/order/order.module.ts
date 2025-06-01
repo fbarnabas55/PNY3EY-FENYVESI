@@ -6,6 +6,7 @@ import { OrderListComponent } from './pages/order-list/order-list.component';
 import { OrderDetailsComponent } from './pages/order-details/order-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrderEditorComponent } from './pages/order-editor/order-editor.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { OrderEditorComponent } from './pages/order-editor/order-editor.componen
     OrderRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    NgChartsModule
     
 
   ]

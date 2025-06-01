@@ -75,7 +75,8 @@ export class OrderService {
     return this.http.delete<void>(`${this.baseUrl}/SignDesign/${id}`);
   }
 
-
+  //////////////////////STATISZTIKA////////////////////////////////////
+  
   getMaxOrderThisMonth(): Observable<any> {
     return this.http.get(`${this.baseUrl}/Order/stats/max-order-current-month`);
   }

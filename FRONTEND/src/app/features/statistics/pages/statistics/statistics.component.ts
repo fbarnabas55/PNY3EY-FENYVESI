@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../order/services/order.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-statistics',

@@ -1,36 +1,31 @@
 <div class="container py-4">
   <h2 class="mb-4">Statisztikák</h2>
 
-  <div class="row">
-    <!-- Legnagyobb rendelés -->
-    <div class="col-md-6 mb-4">
-      <div class="card p-3 shadow glass-card">
-        <h5>Hónap legnagyobb rendelése</h5>
-        <p><strong>{{ maxOrder?.orderName }}</strong></p>
-        <p class="text-success fw-bold">{{ maxOrder?.totalPrice | currency:'HUF':'symbol':'1.0-0' }}</p>
-      </div>
-    </div>
+  <!-- Legnagyobb rendelés -->
+  <div class="alert alert-info mb-4" *ngIf="maxOrder">
+    A hónap legnagyobb rendelése: <strong>{{ maxOrder.name }}</strong> – 
+    <strong>{{ maxOrder.amount | number }} Ft</strong>
+  </div>
 
-    <!-- Oszlopdiagram: rendelés darabszám -->
+  <div class="row">
+    <!-- Oszlopdiagram: Rendelések száma havonta -->
     <div class="col-md-6 mb-4">
-      <div class="card p-3 shadow glass-card">
-        <h5>Rendelések száma havonta</h5>
+      <div class="card p-3">
+        <h5 class="card-title">Rendelések száma havonta</h5>
         <canvas baseChart
           [data]="ordersPerMonthChartData"
-          [labels]="ordersPerMonthLabels"
-          [chartType]="'bar'">
+          [type]="'bar'">
         </canvas>
       </div>
     </div>
 
-    <!-- Kördiagram: legtöbb projekt -->
+    <!-- Kördiagram: Rendelés a legtöbb projekttel -->
     <div class="col-md-6 mb-4">
-      <div class="card p-3 shadow glass-card">
-        <h5>Rendelés a legtöbb projekttel</h5>
+      <div class="card p-3">
+        <h5 class="card-title">Legtöbb projekt egy rendeléshez</h5>
         <canvas baseChart
           [data]="projectCountChartData"
-          [labels]="projectCountLabels"
-          [chartType]="'doughnut'">
+          [type]="'doughnut'">
         </canvas>
       </div>
     </div>
