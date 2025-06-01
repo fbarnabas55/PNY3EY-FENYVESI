@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../order/services/order.service';
-import { ChartData } from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-statistics',
@@ -21,6 +21,19 @@ export class StatisticsComponent implements OnInit {
         backgroundColor: '#0d6efd'
       }
     ]
+  };
+
+  ordersPerMonthChartOptions: ChartOptions<'bar'> = {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 1,
+          precision: 0
+        }
+      }
+    }
   };
 
   // Kördiagram adatok
@@ -47,15 +60,17 @@ export class StatisticsComponent implements OnInit {
     this.orderService.getMaxOrderThisMonth().subscribe(data => {
       this.maxOrder = {
         name: data.orderName,
-        amount: data.totalPrice
+        amount: data.totalValue
       };
     });
   }
 
   loadOrdersPerMonth(): void {
     this.orderService.getOrdersPerMonth().subscribe(data => {
-      this.ordersPerMonthChartData.labels = data.map(d => d.month);
-      this.ordersPerMonthChartData.datasets[0].data = data.map(d => d.count);
+      this.ordersPerMonthChartData.labels = data.map(d =>
+        `${d.year}.${String(d.month).padStart(2, '0')}`
+      );
+      this.ordersPerMonthChartData.datasets[0].data = data.map(d => d.orderCount);
     });
   }
 
