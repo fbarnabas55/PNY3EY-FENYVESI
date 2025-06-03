@@ -85,8 +85,8 @@ export class OrderService {
     return this.http.get<any[]>(`${this.baseUrl}/Order/stats/orders-per-month`);
   }
 
-  getOrderWithMostProjectsThisMonth(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/Order/stats/top-project-order`);
+  getProjectCountsPerOrderThisMonth(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Order/stats/project-counts-per-order`);
   }
 
 

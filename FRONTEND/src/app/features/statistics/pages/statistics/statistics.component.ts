@@ -74,15 +74,18 @@ export class StatisticsComponent implements OnInit {
 }
 
   loadOrderWithMostProjects(): void {
-    this.orderService.getOrderWithMostProjectsThisMonth().subscribe(data => {
-      if (data) {
+    this.orderService.getProjectCountsPerOrderThisMonth().subscribe(data => {
+      if (data && data.length > 0) {
         this.projectCountChartData = {
-          labels: [data.orderName],
+          labels: data.map((d: any) => d.orderName),
           datasets: [
             {
-              label: 'Projekt szám',
-              data: [data.projectCount],
-              backgroundColor: ['#0d6efd', '#6610f2', '#198754', '#ffc107', '#dc3545']
+              label: 'Projektek száma',
+              data: data.map((d: any) => d.projectCount),
+              backgroundColor: [
+                '#0d6efd', '#6610f2', '#198754', '#ffc107', '#dc3545',
+                '#20c997', '#6c757d', '#fd7e14', '#e83e8c', '#6f42c1'
+              ]
             }
           ]
         };
