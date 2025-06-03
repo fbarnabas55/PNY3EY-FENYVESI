@@ -11,20 +11,14 @@ import { ChartData, ChartOptions } from 'chart.js';
 export class StatisticsComponent implements OnInit {
   maxOrder: { name: string; amount: number } | null = null;
 
-  // Oszlopdiagram adatok
   ordersPerMonthChartData: ChartData<'bar'> = {
     labels: [],
-    datasets: [
-      {
-        label: 'Rendelések száma',
-        data: [],
-        backgroundColor: '#0d6efd'
-      }
-    ]
+    datasets: []
   };
 
   ordersPerMonthChartOptions: ChartOptions<'bar'> = {
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true,
@@ -36,16 +30,9 @@ export class StatisticsComponent implements OnInit {
     }
   };
 
-  // Kördiagram adatok
   projectCountChartData: ChartData<'doughnut'> = {
     labels: [],
-    datasets: [
-      {
-        label: 'Projekt szám',
-        data: [],
-        backgroundColor: ['#0d6efd', '#6610f2', '#198754', '#ffc107', '#dc3545']
-      }
-    ]
+    datasets: []
   };
 
   constructor(private orderService: OrderService) {}
@@ -58,26 +45,48 @@ export class StatisticsComponent implements OnInit {
 
   loadMaxOrderThisMonth(): void {
     this.orderService.getMaxOrderThisMonth().subscribe(data => {
-      this.maxOrder = {
-        name: data.orderName,
-        amount: data.totalValue
-      };
+      if (data) {
+        this.maxOrder = {
+          name: data.orderName,
+          amount: data.totalValue
+        };
+      }
     });
   }
 
   loadOrdersPerMonth(): void {
-    this.orderService.getOrdersPerMonth().subscribe(data => {
-      this.ordersPerMonthChartData.labels = data.map(d =>
-        `${d.year}.${String(d.month).padStart(2, '0')}`
-      );
-      this.ordersPerMonthChartData.datasets[0].data = data.map(d => d.orderCount);
-    });
-  }
+  this.orderService.getOrdersPerMonth().subscribe(data => {
+    const labels = data.map(d => `${d.year}.${String(d.month).padStart(2, '0')}`);
+    const values = data.map(d => d.orderCount);
+
+    // Mindig új objektumot hozzunk létre!
+    this.ordersPerMonthChartData = {
+      labels: [...labels],
+      datasets: [
+        {
+          label: 'Rendelések száma',
+          data: [...values],
+          backgroundColor: '#0d6efd'
+        }
+      ]
+    };
+  });
+}
 
   loadOrderWithMostProjects(): void {
     this.orderService.getOrderWithMostProjectsThisMonth().subscribe(data => {
-      this.projectCountChartData.labels = [data.orderName];
-      this.projectCountChartData.datasets[0].data = [data.projectCount];
+      if (data) {
+        this.projectCountChartData = {
+          labels: [data.orderName],
+          datasets: [
+            {
+              label: 'Projekt szám',
+              data: [data.projectCount],
+              backgroundColor: ['#0d6efd', '#6610f2', '#198754', '#ffc107', '#dc3545']
+            }
+          ]
+        };
+      }
     });
   }
 }
